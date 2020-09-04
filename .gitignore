@@ -38,4 +38,7 @@ hs_err_pid*
 ## ignoring target file
 target/
 
+.idea/**
+**/.idea
+
 # End of https://www.toptal.com/developers/gitignore/api/java,code-java,java-web
