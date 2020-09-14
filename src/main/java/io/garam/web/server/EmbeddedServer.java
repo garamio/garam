@@ -7,5 +7,8 @@ package io.garam.web.server;
  */
 public interface EmbeddedServer {
 
-    void start() throws Exception;
+    /**
+     * @throws Exception if error occurred during execution.
+     */
+    void startServer() throws Exception;
 }
