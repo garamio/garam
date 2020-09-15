@@ -11,4 +11,9 @@ public interface EmbeddedServer {
      * @throws Exception if error occurred during execution.
      */
     void startServer() throws Exception;
+
+    /**
+     * @throws Exception if error occurred during abortion.
+     */
+    void abort() throws Exception;
 }

@@ -7,7 +7,5 @@ package io.garam.web.http;
  */
 public interface Context {
 
-    Request getRequest();
-
-    Response getResponse();
+    Request request();
 }

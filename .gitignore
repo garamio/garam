@@ -41,4 +41,7 @@ target/
 .idea/**
 **/.idea
 
+.gitignore/**
+**/.gitignore
+
 # End of https://www.toptal.com/developers/gitignore/api/java,code-java,java-web

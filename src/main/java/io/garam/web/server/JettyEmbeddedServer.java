@@ -21,7 +21,14 @@ public class JettyEmbeddedServer extends AbstractHandler implements EmbeddedServ
 
     @Override
     public void startServer() throws Exception {
+        server.start();
+        server.join();
+    }
 
+    @Override
+    public void abort() throws Exception {
+        server.stop();
+        server.destroy();
     }
 
     @Override
