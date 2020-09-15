@@ -6,4 +6,11 @@ package io.garam.web.http;
  * @author hyeyoom
  */
 public interface Response {
+
+    Response status(HttpStatus status);
+
+    Response contentType(String contentType);
+
+    Response text(String body);
+
 }

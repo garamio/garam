@@ -19,11 +19,11 @@ public class DefaultContext implements Context {
 
     @Override
     public Request request() {
-        return null;
+        return request;
     }
 
     @Override
     public Response response() {
-        return null;
+        return response;
     }
 }
