@@ -8,4 +8,5 @@ package io.garam.web.http;
 public interface Context {
 
     Request request();
+    Response response();
 }

@@ -8,6 +8,11 @@ package io.garam.web.server;
 public interface EmbeddedServer {
 
     /**
+     * @param configuration configuration
+     */
+    void init(EmbeddedServerConfiguration configuration);
+
+    /**
      * @throws Exception if error occurred during execution.
      */
     void startServer() throws Exception;
