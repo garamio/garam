@@ -1,12 +1,14 @@
 package io.garam.web;
 
-import io.garam.core.DefaultGaramFactory;
-import io.garam.core.GaramFactory;
 import io.garam.web.handlers.RequestHandler;
 import io.garam.web.http.RequestMethod;
 import io.garam.web.server.DefaultEmbeddedServerFactory;
 import io.garam.web.server.EmbeddedServer;
+import io.garam.web.server.EmbeddedServerConfiguration;
 import io.garam.web.server.EmbeddedServerFactory;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Garam Web Application Instance
@@ -20,7 +22,7 @@ final class GaramFlow {
     private int port = UNDEFINED_PORT;
 
     private final EmbeddedServer embeddedServer;
-    private final GaramFactory factory = new DefaultGaramFactory();
+    private final Map<HandlerKey, HandlerExecutor> handlerMap = new HashMap<>();
 
     private GaramFlow() {
         EmbeddedServerFactory embeddedServerFactory = new DefaultEmbeddedServerFactory();
@@ -32,12 +34,9 @@ final class GaramFlow {
     }
 
     void addHandler(String path, RequestHandler handler, RequestMethod method) {
-        final String alias = makeAliasWithPathAndMethod(path, method);
-        factory.registerGaram(alias, handler);
-    }
-
-    private String makeAliasWithPathAndMethod(String path, RequestMethod method) {
-        return String.format("%s:%s", path, method);
+        final HandlerKey handlerKey = new HandlerKey(path, method);
+        final HandlerExecutor handlerExecutor = new HandlerExecutor(handler);
+        handlerMap.put(handlerKey, handlerExecutor);
     }
 
     void port(int port) {
@@ -51,6 +50,9 @@ final class GaramFlow {
      */
     void flow() throws Exception {
         try {
+            final HandlerMapping handlerMapping = new HandlerMapping(handlerMap);
+            final EmbeddedServerConfiguration configuration = new EmbeddedServerConfiguration(port, handlerMapping);
+            embeddedServer.init(configuration);
             embeddedServer.startServer();
         } catch (Exception e) {
             embeddedServer.abort();
