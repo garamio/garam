@@ -41,6 +41,7 @@ target/
 .idea/**
 **/.idea
 
+build/**
 .gradle/**
 
 build
