@@ -9,4 +9,5 @@ public interface Context {
 
     Request request();
     Response response();
+    Session session();
 }
