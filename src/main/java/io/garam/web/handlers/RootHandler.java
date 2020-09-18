@@ -10,7 +10,6 @@ import org.eclipse.jetty.server.session.SessionHandler;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class RootHandler extends SessionHandler {
@@ -30,8 +29,6 @@ public class RootHandler extends SessionHandler {
             return;
         }
         baseRequest.setHandled(true);
-        final HttpSession session = request.getSession(true);
-        System.out.println(session.getId());
         final Context context = new DefaultContext(request, response);
         handler.execute(context);
     }
