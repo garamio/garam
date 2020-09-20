@@ -5,6 +5,7 @@ import io.garam.web.HandlerMapping;
 import io.garam.web.Middlewares;
 import io.garam.web.http.Context;
 import io.garam.web.http.DefaultContext;
+import io.garam.web.ui.MustacheTemplateEngine;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.session.SessionHandler;
 
@@ -31,7 +32,8 @@ public class RootHandler extends SessionHandler {
             return;
         }
         baseRequest.setHandled(true);
-        final Context context = new DefaultContext(request, response);
+        // TODO: 지금은 임시로 템플릿 엔진을 지정했지만 설정 구조를 잡고 난 후 분리한다.
+        final Context context = new DefaultContext(request, response, new MustacheTemplateEngine());
         pre(context);
         handler.execute(context);
         post(context);
@@ -55,7 +57,6 @@ public class RootHandler extends SessionHandler {
         for (Middleware aroundMiddleware : middlewares.getAroundMiddlewares()) {
             aroundMiddleware.execute(context);
         }
-
     }
 
     private HandlerExecutor getHandlerExecutor(HttpServletRequest request) {
