@@ -11,6 +11,10 @@ repositories {
 
 dependencies {
 
+    // logging
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.30'
+
     // unit test
     testCompile group: 'org.assertj', name: 'assertj-core', version: '3.16.1'
     testCompile group: 'org.mockito', name: 'mockito-core', version: '3.5.10'

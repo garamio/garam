@@ -1,5 +1,6 @@
 package io.garam.web;
 
+import io.garam.web.handlers.Middleware;
 import io.garam.web.handlers.RequestHandler;
 import io.garam.web.http.RequestMethod;
 
@@ -60,6 +61,18 @@ public final class Garam {
 
     public static void port(int port) {
         getInstance().port(port);
+    }
+
+    public static void use(Middleware ...middlewares) {
+        getInstance().use(middlewares);
+    }
+
+    public static void before(Middleware ...middlewares) {
+        getInstance().before(middlewares);
+    }
+
+    public static void after(Middleware ...middlewares) {
+        getInstance().after(middlewares);
     }
 
     public static void run() {
