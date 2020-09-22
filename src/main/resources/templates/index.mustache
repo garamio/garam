@@ -2,9 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Main Page</title>
 </head>
 <body>
-<h1>{{header}}</h1>
+<h1>회원가입</h1>
+<form action="/user" method="post">
+    <label for="email">Email</label><input id="email" name="email" type="email"/><br/>
+    <label for="password">Password</label><input id="password" name="password" type="password"/><br/>
+    <button type="submit">Join Us!</button>
+</form>
+<h1>로그인</h1>
 </body>
 </html>

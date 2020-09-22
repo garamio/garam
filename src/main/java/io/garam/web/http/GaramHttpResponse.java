@@ -22,6 +22,7 @@ public class GaramHttpResponse implements Response {
 
     @Override
     public Response contentType(String contentType) {
+        // TODO: 하드코딩 강제되는데 처리하시오
         response.setContentType(contentType);
         return this;
     }
@@ -29,6 +30,13 @@ public class GaramHttpResponse implements Response {
     @Override
     public Response text(String body) {
         write(body.getBytes());
+        return this;
+    }
+
+    @Override
+    public Response redirect(String path) {
+        response.setStatus(HttpStatus.MOVED_PERMANENTLY.getCode());
+        response.setHeader("Location", path);
         return this;
     }
 
