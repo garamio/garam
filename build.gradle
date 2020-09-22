@@ -28,3 +28,9 @@ dependencies {
     // template engine
     compile group: 'com.samskivert', name: 'jmustache', version: '1.15'
 }
+
+jar {
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
