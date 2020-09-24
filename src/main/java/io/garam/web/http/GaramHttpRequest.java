@@ -11,6 +11,11 @@ public class GaramHttpRequest implements Request {
     }
 
     @Override
+    public String uri() {
+        return request.getRequestURI();
+    }
+
+    @Override
     public String parameter(String name) {
         return request.getParameter(name);
     }

@@ -7,6 +7,8 @@ package io.garam.web.http;
  */
 public interface Request {
 
+    String uri();
+
     String parameter(String name);
 
 }
