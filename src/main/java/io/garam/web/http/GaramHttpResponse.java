@@ -47,4 +47,10 @@ public class GaramHttpResponse implements Response {
         return this;
     }
 
+    @Override
+    public Response header(String name, String value) {
+        response.setHeader(name, value);
+        return this;
+    }
+
 }
