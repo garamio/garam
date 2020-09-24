@@ -1,8 +1,9 @@
 package io.garam.web.http;
 
+import io.garam.web.utils.HttpServletUtil;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
 public class GaramHttpResponse implements Response {
@@ -29,24 +30,21 @@ public class GaramHttpResponse implements Response {
 
     @Override
     public Response text(String body) {
-        write(body.getBytes());
-        return this;
+        try {
+            HttpServletUtil.write(response.getOutputStream(), body);
+            return this;
+        } catch (IOException e) {
+            // TODO: error handling structure required.
+            throw new IllegalStateException("");
+        }
     }
 
     @Override
     public Response redirect(String path) {
         response.setStatus(HttpStatus.MOVED_PERMANENTLY.getCode());
+        // TODO: 하드코딩 처리하시오
         response.setHeader("Location", path);
         return this;
-    }
-
-    private void write(byte[] raw) {
-        try (final OutputStream os = response.getOutputStream()) {
-            os.write(raw);
-        } catch (IOException e) {
-            // TODO: error handling structure required.
-            throw new IllegalStateException("");
-        }
     }
 
 }
