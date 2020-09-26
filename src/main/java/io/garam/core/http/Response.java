@@ -13,4 +13,7 @@ public interface Response {
 
     Response text(String body);
 
+    Response redirect(String path);
+
+    Response header(String name, String value);
 }

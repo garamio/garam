@@ -6,4 +6,9 @@ package io.garam.core.http;
  * @author hyeyoom
  */
 public interface Request {
+
+    String uri();
+
+    String parameter(String name);
+
 }

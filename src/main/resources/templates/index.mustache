@@ -2,9 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Main Page</title>
+    <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="semantic/semantic.min.js"></script>
 </head>
 <body>
-<h1>{{header}}</h1>
+<div class="ui container">
+    <button id="signup" class="ui button">회원가입</button>
+    <button id="signin" class="ui button">로그인</button>
+    <button id="writepost" class="ui button">글쓰기</button>
+</div>
+<script>
+    const btnSignUp = document.getElementById('signup');
+    btnSignUp.addEventListener('click', () =>location.href = '/signup');
+    const btnSignIn = document.getElementById('signin');
+    btnSignIn.addEventListener('click', () =>location.href = '/signin');
+    const btnWritePost = document.getElementById('writepost');
+    btnWritePost.addEventListener('click', () =>location.href = '/writepost');
+</script>
 </body>
 </html>
