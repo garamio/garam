@@ -1,8 +1,8 @@
 package io.garam.examples;
 
-import io.garam.web.Garam;
-import io.garam.web.http.HttpStatus;
-import io.garam.web.ui.GaramModel;
+import io.garam.core.Garam;
+import io.garam.core.http.HttpStatus;
+import io.garam.core.ui.GaramModel;
 
 import java.util.HashMap;
 import java.util.Map;
