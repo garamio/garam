@@ -2,7 +2,7 @@ package io.garam.examples;
 
 import io.garam.examples.config.PageInitializer;
 import io.garam.examples.member.controller.MemberController;
-import io.garam.web.Garam;
+import io.garam.core.Garam;
 
 public class Application {
 

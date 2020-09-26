@@ -3,8 +3,8 @@ package io.garam.examples.member.controller;
 import io.garam.examples.member.domain.Member;
 import io.garam.examples.member.dto.CreateMemberDto;
 import io.garam.examples.member.service.MemberService;
-import io.garam.web.Garam;
-import io.garam.web.http.Request;
+import io.garam.core.Garam;
+import io.garam.core.http.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
