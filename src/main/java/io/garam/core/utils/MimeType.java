@@ -1,4 +1,4 @@
-package io.garam.web.utils;
+package io.garam.core.utils;
 
 import java.util.Arrays;
 import java.util.HashSet;

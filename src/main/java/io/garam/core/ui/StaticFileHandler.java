@@ -1,6 +1,6 @@
-package io.garam.web.ui;
+package io.garam.core.ui;
 
-import io.garam.web.utils.FileUtil;
+import io.garam.core.utils.FileUtil;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

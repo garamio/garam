@@ -1,6 +1,6 @@
 package io.garam.core.http;
 
-import io.garam.web.utils.HttpServletUtil;
+import io.garam.core.utils.HttpServletUtil;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

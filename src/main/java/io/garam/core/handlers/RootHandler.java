@@ -1,14 +1,14 @@
-package io.garam.web.handlers;
+package io.garam.core.handlers;
 
-import io.garam.web.HandlerExecutor;
-import io.garam.web.HandlerMapping;
-import io.garam.web.Middlewares;
-import io.garam.web.http.Context;
-import io.garam.web.http.DefaultContext;
-import io.garam.web.http.HttpStatus;
-import io.garam.web.ui.MustacheTemplateEngine;
-import io.garam.web.ui.StaticFileHandler;
-import io.garam.web.utils.HttpServletUtil;
+import io.garam.core.HandlerExecutor;
+import io.garam.core.HandlerMapping;
+import io.garam.core.Middlewares;
+import io.garam.core.http.Context;
+import io.garam.core.http.DefaultContext;
+import io.garam.core.http.HttpStatus;
+import io.garam.core.ui.MustacheTemplateEngine;
+import io.garam.core.ui.StaticFileHandler;
+import io.garam.core.utils.HttpServletUtil;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.session.SessionHandler;
 

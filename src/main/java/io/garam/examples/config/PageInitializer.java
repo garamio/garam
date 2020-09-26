@@ -1,7 +1,7 @@
 package io.garam.examples.config;
 
-import io.garam.web.Garam;
-import io.garam.web.ui.GaramModel;
+import io.garam.core.Garam;
+import io.garam.core.ui.GaramModel;
 
 public class PageInitializer {
 

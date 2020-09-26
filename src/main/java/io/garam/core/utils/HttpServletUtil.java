@@ -1,4 +1,4 @@
-package io.garam.web.utils;
+package io.garam.core.utils;
 
 import java.io.IOException;
 import java.io.OutputStream;
