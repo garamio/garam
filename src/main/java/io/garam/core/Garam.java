@@ -3,6 +3,7 @@ package io.garam.core;
 import io.garam.core.handlers.Middleware;
 import io.garam.core.handlers.RequestHandler;
 import io.garam.core.http.RequestMethod;
+import io.garam.core.ui.TemplateEngine;
 
 /**
  * Convenient wrapping module for web layer.
@@ -63,15 +64,19 @@ public final class Garam {
         getInstance().port(port);
     }
 
-    public static void use(Middleware ...middlewares) {
+    public static void template(TemplateEngine templateEngine) {
+        getInstance().registerTemplateEngine(templateEngine);
+    }
+
+    public static void use(Middleware... middlewares) {
         getInstance().use(middlewares);
     }
 
-    public static void before(Middleware ...middlewares) {
+    public static void before(Middleware... middlewares) {
         getInstance().before(middlewares);
     }
 
-    public static void after(Middleware ...middlewares) {
+    public static void after(Middleware... middlewares) {
         getInstance().after(middlewares);
     }
 

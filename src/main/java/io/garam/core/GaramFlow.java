@@ -7,6 +7,7 @@ import io.garam.core.server.DefaultEmbeddedServerFactory;
 import io.garam.core.server.EmbeddedServer;
 import io.garam.core.server.EmbeddedServerConfiguration;
 import io.garam.core.server.EmbeddedServerFactory;
+import io.garam.core.ui.TemplateEngine;
 
 import java.util.*;
 
@@ -26,6 +27,7 @@ final class GaramFlow {
     private final List<Middleware> aroundMiddlewares = new ArrayList<>();
     private final List<Middleware> beforeMiddlewares = new ArrayList<>();
     private final List<Middleware> afterMiddlewares = new ArrayList<>();
+    private TemplateEngine templateEngine;
 
     private GaramFlow() {
         EmbeddedServerFactory embeddedServerFactory = new DefaultEmbeddedServerFactory();
@@ -55,7 +57,7 @@ final class GaramFlow {
         try {
             final HandlerMapping handlerMapping = new HandlerMapping(handlerMap);
             final Middlewares middlewares = new Middlewares(aroundMiddlewares, beforeMiddlewares, afterMiddlewares);
-            final EmbeddedServerConfiguration configuration = new EmbeddedServerConfiguration(port, handlerMapping, middlewares);
+            final EmbeddedServerConfiguration configuration = new EmbeddedServerConfiguration(port, handlerMapping, middlewares, templateEngine);
             embeddedServer.init(configuration);
             embeddedServer.startServer();
         } catch (Exception e) {
@@ -73,5 +75,9 @@ final class GaramFlow {
 
     public void after(Middleware... middlewares) {
         this.afterMiddlewares.addAll(Arrays.asList(middlewares));
+    }
+
+    public void registerTemplateEngine(TemplateEngine templateEngine) {
+        this.templateEngine = templateEngine;
     }
 }
