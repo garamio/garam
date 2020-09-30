@@ -42,8 +42,7 @@ public class GaramHttpResponse implements Response {
     @Override
     public Response redirect(String path) {
         response.setStatus(HttpStatus.MOVED_PERMANENTLY.getCode());
-        // TODO: 하드코딩 처리하시오
-        response.setHeader("Location", path);
+        header("Location", path);
         return this;
     }
 

@@ -15,7 +15,13 @@ public class JettyEmbeddedServer implements EmbeddedServer {
     @Override
     public void init(EmbeddedServerConfiguration configuration) {
         server = new Server(configuration.getPort());
-        server.setHandler(new RootHandler(configuration.getHandlerMapping(), configuration.getMiddlewares()));
+        server.setHandler(
+                new RootHandler(
+                        configuration.getHandlerMapping(),
+                        configuration.getMiddlewares(),
+                        configuration.getTemplateEngine()
+                )
+        );
     }
 
     @Override

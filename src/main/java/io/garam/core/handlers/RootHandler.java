@@ -6,8 +6,8 @@ import io.garam.core.Middlewares;
 import io.garam.core.http.Context;
 import io.garam.core.http.DefaultContext;
 import io.garam.core.http.HttpStatus;
-import io.garam.core.ui.MustacheTemplateEngine;
 import io.garam.core.ui.StaticFileHandler;
+import io.garam.core.ui.TemplateEngine;
 import io.garam.core.utils.HttpServletUtil;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.session.SessionHandler;
@@ -21,12 +21,13 @@ public class RootHandler extends SessionHandler {
 
     private final HandlerMapping handlerMapping;
     private final Middlewares middlewares;
-    private final MustacheTemplateEngine templateEngine = new MustacheTemplateEngine();
+    private final TemplateEngine templateEngine;
     private final StaticFileHandler staticFileHandler = new StaticFileHandler();
 
-    public RootHandler(HandlerMapping handlerMapping, Middlewares middlewares) {
+    public RootHandler(HandlerMapping handlerMapping, Middlewares middlewares, TemplateEngine templateEngine) {
         this.handlerMapping = handlerMapping;
         this.middlewares = middlewares;
+        this.templateEngine = templateEngine;
     }
 
     @Override
@@ -38,7 +39,6 @@ public class RootHandler extends SessionHandler {
             return;
         }
         baseRequest.setHandled(true);
-        // TODO: 지금은 임시로 템플릿 엔진을 지정했지만 설정 구조를 잡고 난 후 분리한다.
         final Context context = new DefaultContext(request, response, templateEngine);
         pre(context);
         handler.execute(context);
