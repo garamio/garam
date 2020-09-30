@@ -18,9 +18,7 @@ public class MustacheTemplateEngine implements TemplateEngine {
     private static final Mustache.Compiler compiler = Mustache.compiler();
 
     private final Map<String, Template> cachedTemplates = new HashMap<>();
-    // TODO: 설정으로 뺄 수 있도록
     private final String rootPath = "/templates";
-    // TODO: 설정으로 뺄 수 있도록
     private final String extension = "mustache";
 
     @Override
