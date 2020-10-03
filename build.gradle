@@ -5,7 +5,6 @@ plugins {
 }
 
 group 'io.garam'
-version '0.4-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -31,13 +30,16 @@ dependencies {
     compile group: 'com.samskivert', name: 'jmustache', version: '1.15'
 }
 
+build {
+    // versioning
+    version = version.toString().substring(0, version.toString().indexOf('-'))
+}
+
 publishing {
     publications {
         maven(MavenPublication) {
             groupId = 'io.garam'
             artifactId = 'core'
-            version = '0.4'
-
             from components.java
         }
     }
