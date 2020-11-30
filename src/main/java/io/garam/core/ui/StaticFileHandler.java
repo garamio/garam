@@ -6,7 +6,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 
-// 임시
 public class StaticFileHandler {
 
     private final String rootPath = "static";
