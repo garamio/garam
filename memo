@@ -1,0 +1,84 @@
+import java.time.LocalDateTime.now
+
+plugins {
+    id("java")
+    `java-library`
+    `maven-publish`
+    id("com.jfrog.bintray") version "1.8.5"
+}
+
+group = "io.garam"
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    // logging
+    api("org.slf4j:slf4j-api:1.7.30")
+    api("org.slf4j:slf4j-simple:1.7.30")
+
+    // unit test
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.2")
+    testImplementation("org.assertj:assertj-core:3.16.1")
+    testImplementation("org.mockito:mockito-core:3.5.10")
+
+    // built-in webserver
+    api("org.eclipse.jetty:jetty-server:9.4.31.v20200723")
+    api("org.eclipse.jetty:jetty-servlet:9.4.31.v20200723")
+
+    // template engine
+    api("com.samskivert:jmustache:1.15")
+}
+
+// read a property from gradle.properties
+fun getPropertyFromGradleProp(s: String) = project.property(s) as String?
+
+tasks {
+    javadoc {
+        options.encoding = "UTF-8"
+    }
+}
+
+val test by tasks.getting(Test::class) {
+    useJUnitPlatform()
+}
+
+val publicationName = "garam-publication"
+
+bintray {
+    user = getPropertyFromGradleProp("bintray_usr")
+    key = getPropertyFromGradleProp("bintray_key")
+    publish = true
+    setPublications(publicationName)
+
+    pkg.apply {
+        repo = "garam-framework"
+        name = "garam"
+        userOrg = "hyeyoom"
+        setLicenses("MIT")
+        vcsUrl = "https://github.com/garamio/garam.git"
+
+        version.apply {
+            name = "0.4"
+            released = now().toString()
+            vcsTag = "0.4"
+        }
+    }
+}
+
+publishing {
+    publications.invoke {
+        publicationName(MavenPublication::class) {
+            pom.withXml {
+                val root = asNode()
+                root.appendNode("description", "Lightweight web framework")
+                root.appendNode("name", "garam")
+                root.appendNode("url", "https://github.com/garamio/garam")
+                root.appendNode("packaging", "jar")
+            }
+        }
+    }
+}

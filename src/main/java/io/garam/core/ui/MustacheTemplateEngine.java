@@ -48,7 +48,7 @@ public class MustacheTemplateEngine implements TemplateEngine {
             cache(templateName, template);
             return template;
         } catch (IOException e) {
-            // TODO: 임시처리 제거 필요.
+            // TODO: remove
             throw new IllegalStateException("");
         }
     }

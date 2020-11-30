@@ -23,7 +23,7 @@ public class GaramHttpResponse implements Response {
 
     @Override
     public Response contentType(String contentType) {
-        // TODO: 하드코딩 강제되는데 처리하시오
+        // TODO: remove
         response.setContentType(contentType);
         return this;
     }
