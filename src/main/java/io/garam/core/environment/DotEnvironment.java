@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * dotenv-like environment & configuration manager.
+ * dotenv-like environment &amp; configuration manager.
  * <p>
  * Rule for environment
  * .env-{env_name}

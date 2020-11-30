@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * {@link <a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types">mozila document</a>}
- * {@link <a href="https://www.weonlydo.com/Mailbox/Help/MimeTypes.html">weonlydo document</a>}
+ * @see <a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types">mozila document</a>
+ * @see <a href="https://www.weonlydo.com/Mailbox/Help/MimeTypes.html">weonlydo document</a>
  *
  * @author hyeyoom
  */

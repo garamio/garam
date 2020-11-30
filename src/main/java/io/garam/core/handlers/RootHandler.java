@@ -45,7 +45,7 @@ public class RootHandler extends SessionHandler {
         post(context);
     }
 
-    // TODO: HandlerExecutor로 일반화 시키는 것도 고민해보자
+    // TODO: HandlerExecutor
     private void handleNotFoundHandler(Request baseRequest, HttpServletRequest request, HttpServletResponse response) {
         final String path = request.getRequestURI();
         final String staticFile = staticFileHandler.readStaticFile(path);
