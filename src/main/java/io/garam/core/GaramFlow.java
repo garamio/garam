@@ -7,6 +7,7 @@ import io.garam.core.server.DefaultEmbeddedServerFactory;
 import io.garam.core.server.EmbeddedServer;
 import io.garam.core.server.EmbeddedServerConfiguration;
 import io.garam.core.server.EmbeddedServerFactory;
+import io.garam.core.ui.MustacheTemplateEngine;
 import io.garam.core.ui.TemplateEngine;
 
 import java.util.*;
@@ -27,7 +28,7 @@ final class GaramFlow {
     private final List<Middleware> aroundMiddlewares = new ArrayList<>();
     private final List<Middleware> beforeMiddlewares = new ArrayList<>();
     private final List<Middleware> afterMiddlewares = new ArrayList<>();
-    private TemplateEngine templateEngine;
+    private TemplateEngine templateEngine = new MustacheTemplateEngine();
 
     private GaramFlow() {
         EmbeddedServerFactory embeddedServerFactory = new DefaultEmbeddedServerFactory();
