@@ -19,4 +19,9 @@ public class GaramHttpRequest implements Request {
     public String parameter(String name) {
         return request.getParameter(name);
     }
+
+    @Override
+    public String getHeader(String name) {
+        return request.getHeader(name);
+    }
 }

@@ -41,7 +41,7 @@ public class GaramHttpResponse implements Response {
 
     @Override
     public Response redirect(String path) {
-        response.setStatus(HttpStatus.MOVED_PERMANENTLY.getCode());
+        response.setStatus(HttpStatus.FOUND.getCode());
         header("Location", path);
         return this;
     }
