@@ -8,32 +8,32 @@ package io.garam.core.http;
 public interface Response {
 
     /**
-     * @param status status to set for response
+     * @param status the status to set for response
      * @return response itself
      */
     Response status(HttpStatus status);
 
     /**
-     * @param contentType type that specifies the MIME type of the content
+     * @param contentType the type that specifies the MIME type of the content
      * @return response itself
      */
     Response contentType(String contentType);
 
     /**
-     * @param body message body
+     * @param body the message body
      * @return response itself
      */
     Response text(String body);
 
     /**
-     * @param path path to move
+     * @param path the path to move
      * @return response itself
      */
     Response redirect(String path);
 
     /**
-     * @param name name of header
-     * @param value value of header
+     * @param name the name of header
+     * @param value the value of header
      * @return response itself
      */
     Response header(String name, String value);

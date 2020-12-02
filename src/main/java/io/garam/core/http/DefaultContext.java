@@ -45,8 +45,8 @@ public class DefaultContext implements Context {
     }
 
     @Override
-    public void render(String templateName, Model model) {
-        final String renderedPage = templateEngine.render(templateName, model);
+    public void render(String viewName, Model model) {
+        final String renderedPage = templateEngine.render(viewName, model);
         response.text(renderedPage);
     }
 }

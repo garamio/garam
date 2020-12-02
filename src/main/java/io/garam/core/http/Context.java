@@ -25,6 +25,10 @@ public interface Context {
      */
     Session session();
 
-    void render(String templateName, Model model);
+    /**
+     * @param viewName the name of view.
+     * @param model the holder for model attributes.
+     */
+    void render(String viewName, Model model);
 
 }
