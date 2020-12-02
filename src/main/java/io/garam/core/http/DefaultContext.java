@@ -1,5 +1,6 @@
 package io.garam.core.http;
 
+import io.garam.core.ui.GaramModel;
 import io.garam.core.ui.Model;
 import io.garam.core.ui.TemplateEngine;
 
@@ -11,6 +12,7 @@ public class DefaultContext implements Context {
     private final Request request;
     private final Response response;
     private final Session session;
+    private final Model model = new GaramModel();
     private final TemplateEngine templateEngine;
 
     public DefaultContext(HttpServletRequest request, HttpServletResponse response, TemplateEngine templateEngine) {
@@ -45,8 +47,14 @@ public class DefaultContext implements Context {
     }
 
     @Override
+    public Model model() {
+        return model;
+    }
+
+    @Override
     public void render(String viewName, Model model) {
-        final String renderedPage = templateEngine.render(viewName, model);
+        final Model newModel = this.model.mergeAttributes(model);
+        final String renderedPage = templateEngine.render(viewName, newModel);
         response.text(renderedPage);
     }
 }

@@ -26,6 +26,11 @@ public interface Context {
     Session session();
 
     /**
+     * @return model
+     */
+    Model model();
+
+    /**
      * @param viewName the name of view.
      * @param model the holder for model attributes.
      */

@@ -16,6 +16,12 @@ public class GaramModel implements Model {
     }
 
     @Override
+    public Model mergeAttributes(Model otherModel) {
+        map.putAll(otherModel.asMap());
+        return new GaramModel(map);
+    }
+
+    @Override
     public Model addAttribute(String attributeName, Object attributeValue) {
         map.put(attributeName, attributeValue);
         return this;
