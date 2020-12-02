@@ -24,6 +24,7 @@ factoryConfiguration.json
 
 # Package Files #
 *.jar
+!gradle-wrapper.jar
 *.war
 *.nar
 *.ear
@@ -46,5 +47,5 @@ build/**
 
 build
 
-src/main/java/io/garam/examples/
+src/main/java/io/garam/examples
 # End of https://www.toptal.com/developers/gitignore/api/java,code-java,java-web
