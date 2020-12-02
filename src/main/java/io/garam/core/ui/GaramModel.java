@@ -16,6 +16,12 @@ public class GaramModel implements Model {
     }
 
     @Override
+    public Model addAttribute(String attributeName, Object attributeValue) {
+        map.put(attributeName, attributeValue);
+        return this;
+    }
+
+    @Override
     public Map<String, Object> asMap() {
         return map;
     }
