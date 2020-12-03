@@ -69,23 +69,17 @@ public class RootHandler extends SessionHandler {
     }
 
     private void pre(Context context) {
-        for (Middleware beforeMiddleware : middlewares.getBeforeMiddlewares()) {
-            beforeMiddleware.execute(context);
-        }
+        middlewares.executeBefore(context);
         around(context);
     }
 
     private void post(Context context) {
-        for (Middleware afterMiddleware : middlewares.getAfterMiddlewares()) {
-            afterMiddleware.execute(context);
-        }
+        middlewares.executeAfter(context);
         around(context);
     }
 
     private void around(Context context) {
-        for (Middleware aroundMiddleware : middlewares.getAroundMiddlewares()) {
-            aroundMiddleware.execute(context);
-        }
+        middlewares.executeAround(context);
     }
 
     private HandlerExecutor getHandlerExecutor(HttpServletRequest request) {
