@@ -1,9 +1,15 @@
 package io.garam.core;
 
 import io.garam.core.handlers.Middleware;
+import io.garam.core.http.Context;
 
 import java.util.List;
 
+/**
+ * First class collection for middlewares. This object holds actual middlewares.
+ *
+ * @author hyeyoom
+ */
 public class Middlewares {
 
     private final List<Middleware> aroundMiddlewares;
@@ -16,15 +22,15 @@ public class Middlewares {
         this.afterMiddlewares = afterMiddlewares;
     }
 
-    public List<Middleware> getAroundMiddlewares() {
-        return aroundMiddlewares;
+    public void executeAround(Context ctx) {
+        aroundMiddlewares.forEach(middleware -> middleware.execute(ctx));
     }
 
-    public List<Middleware> getBeforeMiddlewares() {
-        return beforeMiddlewares;
+    public void executeBefore(Context ctx) {
+        beforeMiddlewares.forEach(middleware -> middleware.execute(ctx));
     }
 
-    public List<Middleware> getAfterMiddlewares() {
-        return afterMiddlewares;
+    public void executeAfter(Context ctx) {
+        afterMiddlewares.forEach(middleware -> middleware.execute(ctx));
     }
 }

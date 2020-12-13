@@ -5,10 +5,17 @@ package io.garam.core.http;
  *
  * @author hyeyoom
  */
-public interface Request {
+public interface Request extends HttpMessage {
 
+    /**
+     * @return URI
+     */
     String uri();
 
+    /**
+     * @param name name of parameter
+     * @return value of parameter
+     */
     String parameter(String name);
 
 }

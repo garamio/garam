@@ -9,51 +9,44 @@ import io.garam.core.http.HttpStatus;
 import io.garam.core.ui.StaticFileHandler;
 import io.garam.core.ui.TemplateEngine;
 import io.garam.core.utils.HttpServletUtil;
-import org.eclipse.jetty.server.Request;
-import org.eclipse.jetty.server.session.SessionHandler;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
-public class RootHandler extends SessionHandler {
+public class RootDispatcher implements Dispatcher {
 
     private final HandlerMapping handlerMapping;
     private final Middlewares middlewares;
     private final TemplateEngine templateEngine;
     private final StaticFileHandler staticFileHandler = new StaticFileHandler();
 
-    public RootHandler(HandlerMapping handlerMapping, Middlewares middlewares, TemplateEngine templateEngine) {
+    public RootDispatcher(HandlerMapping handlerMapping, Middlewares middlewares, TemplateEngine templateEngine) {
         this.handlerMapping = handlerMapping;
         this.middlewares = middlewares;
         this.templateEngine = templateEngine;
     }
 
     @Override
-    public void doHandle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
+    public boolean dispatch(HttpServletRequest request, HttpServletResponse response) {
         final HandlerExecutor handler = getHandlerExecutor(request);
         if (handler == null) {
-            handleNotFoundHandler(baseRequest, request, response);
-            return;
+            return handleNotFoundHandler(request, response);
         }
-        baseRequest.setHandled(true);
         final Context context = new DefaultContext(request, response, templateEngine);
         pre(context);
         handler.execute(context);
         post(context);
+        return true;
     }
 
-    // TODO: HandlerExecutor
-    private void handleNotFoundHandler(Request baseRequest, HttpServletRequest request, HttpServletResponse response) {
+    private boolean handleNotFoundHandler(HttpServletRequest request, HttpServletResponse response) {
         final String path = request.getRequestURI();
         final String staticFile = staticFileHandler.readStaticFile(path);
         if (staticFile == null) {
-            return;
+            return false;
         }
-        baseRequest.setHandled(true);
         responseStatic(response, path, staticFile);
+        return true;
     }
 
     private void responseStatic(HttpServletResponse response, String path, String staticFile) {
@@ -69,23 +62,17 @@ public class RootHandler extends SessionHandler {
     }
 
     private void pre(Context context) {
-        for (Middleware beforeMiddleware : middlewares.getBeforeMiddlewares()) {
-            beforeMiddleware.execute(context);
-        }
+        middlewares.executeBefore(context);
         around(context);
     }
 
     private void post(Context context) {
-        for (Middleware afterMiddleware : middlewares.getAfterMiddlewares()) {
-            afterMiddleware.execute(context);
-        }
+        middlewares.executeAfter(context);
         around(context);
     }
 
     private void around(Context context) {
-        for (Middleware aroundMiddleware : middlewares.getAroundMiddlewares()) {
-            aroundMiddleware.execute(context);
-        }
+        middlewares.executeAround(context);
     }
 
     private HandlerExecutor getHandlerExecutor(HttpServletRequest request) {
