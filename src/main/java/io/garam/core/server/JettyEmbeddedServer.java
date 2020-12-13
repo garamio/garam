@@ -1,6 +1,7 @@
 package io.garam.core.server;
 
-import io.garam.core.handlers.RootHandler;
+import io.garam.core.handlers.Dispatcher;
+import io.garam.core.handlers.RootDispatcher;
 import org.eclipse.jetty.server.Server;
 
 /**
@@ -15,13 +16,12 @@ public class JettyEmbeddedServer implements EmbeddedServer {
     @Override
     public void init(EmbeddedServerConfiguration configuration) {
         server = new Server(configuration.getPort());
-        server.setHandler(
-                new RootHandler(
-                        configuration.getHandlerMapping(),
-                        configuration.getMiddlewares(),
-                        configuration.getTemplateEngine()
-                )
+        final Dispatcher dispatcher = new RootDispatcher(
+                configuration.getHandlerMapping(),
+                configuration.getMiddlewares(),
+                configuration.getTemplateEngine()
         );
+        server.setHandler(new RootHandler(dispatcher));
     }
 
     @Override

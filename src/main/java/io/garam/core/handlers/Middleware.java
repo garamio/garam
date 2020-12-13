@@ -5,6 +5,7 @@ import io.garam.core.http.Context;
 /**
  * @author hyeyoom
  */
+@FunctionalInterface
 public interface Middleware {
 
     /**
