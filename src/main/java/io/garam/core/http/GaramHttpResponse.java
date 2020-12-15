@@ -29,17 +29,6 @@ public class GaramHttpResponse implements Response {
     }
 
     @Override
-    public Response text(String body) {
-        try {
-            HttpServletUtil.write(response.getOutputStream(), body);
-            return this;
-        } catch (IOException e) {
-            // TODO: error handling structure required.
-            throw new IllegalStateException("");
-        }
-    }
-
-    @Override
     public Response redirect(String path) {
         response.setStatus(HttpStatus.FOUND.getCode());
         header("Location", path);
@@ -50,6 +39,32 @@ public class GaramHttpResponse implements Response {
     public Response header(String name, String value) {
         response.setHeader(name, value);
         return this;
+    }
+
+    @Override
+    public Response text(String body) {
+        try {
+            status(HttpStatus.OK);
+            contentType("text/plain;");
+            HttpServletUtil.write(response.getOutputStream(), body);
+            return this;
+        } catch (IOException e) {
+            // TODO: error handling structure required.
+            throw new IllegalStateException("");
+        }
+    }
+
+    @Override
+    public Response html(String body) {
+        try {
+            status(HttpStatus.OK);
+            contentType("text/html;");
+            HttpServletUtil.write(response.getOutputStream(), body);
+            return this;
+        } catch (IOException e) {
+            // TODO: error handling structure required.
+            throw new IllegalStateException("");
+        }
     }
 
 }

@@ -55,6 +55,6 @@ public class DefaultContext implements Context {
     public void render(String viewName, Model model) {
         final Model newModel = this.model.mergeAttributes(model);
         final String renderedPage = templateEngine.render(viewName, newModel);
-        response.text(renderedPage);
+        response.html(renderedPage);
     }
 }
