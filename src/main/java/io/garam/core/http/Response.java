@@ -52,4 +52,11 @@ public interface Response {
      * @return response itself
      */
     Response json(HttpStatus status, Object body);
+
+    /**
+     * @param status Response status
+     * @param body prettified json
+     * @return response itself
+     */
+    Response prettifiedJson(HttpStatus status, Object body);
 }

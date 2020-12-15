@@ -8,11 +8,18 @@ public final class Converter {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    public static String stringify(Object obj) {
+    public static String stringify(Object obj, boolean pretty) {
         try {
-            return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
+            if (pretty) {
+                return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
+            }
+            return MAPPER.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
             throw new DataConversionException("An error occurred during the json conversion", e);
         }
+    }
+
+    public static String stringify(Object obj) {
+        return stringify(obj, true);
     }
 }

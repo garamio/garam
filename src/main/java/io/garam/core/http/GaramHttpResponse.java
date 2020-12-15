@@ -70,16 +70,26 @@ public class GaramHttpResponse implements Response {
 
     @Override
     public Response json(HttpStatus status, Object body) {
+        json(status, body, false);
+        return this;
+    }
+
+    @Override
+    public Response prettifiedJson(HttpStatus status, Object body) {
+        json(status, body, true);
+        return this;
+    }
+
+    private void json(HttpStatus status, Object body, boolean pretty) {
         status(status);
         contentType("application/json");
-        final String json = Converter.stringify(body);
+        final String json = Converter.stringify(body, pretty);
         try {
             HttpServletUtil.write(response.getOutputStream(), json);
         } catch (IOException e) {
             // TODO: error handling structure required.
             throw new IllegalStateException("");
         }
-        return this;
     }
 
 }
