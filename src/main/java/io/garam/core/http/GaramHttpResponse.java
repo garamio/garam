@@ -43,9 +43,9 @@ public class GaramHttpResponse implements Response {
     }
 
     @Override
-    public Response text(String body) {
+    public Response text(HttpStatus status, String body) {
         try {
-            status(HttpStatus.OK);
+            status(status);
             contentType("text/plain;");
             HttpServletUtil.write(response.getOutputStream(), body);
             return this;
@@ -56,9 +56,9 @@ public class GaramHttpResponse implements Response {
     }
 
     @Override
-    public Response html(String body) {
+    public Response html(HttpStatus status, String body) {
         try {
-            status(HttpStatus.OK);
+            status(status);
             contentType("text/html;");
             HttpServletUtil.write(response.getOutputStream(), body);
             return this;
@@ -69,8 +69,8 @@ public class GaramHttpResponse implements Response {
     }
 
     @Override
-    public Response json(Object body) {
-        status(HttpStatus.OK);
+    public Response json(HttpStatus status, Object body) {
+        status(status);
         contentType("application/json");
         final String json = Converter.stringify(body);
         try {

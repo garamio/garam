@@ -33,20 +33,23 @@ public interface Response {
     Response header(String name, String value);
 
     /**
+     * @param status Response Status
      * @param body the message body
      * @return response itself
      */
-    Response text(String body);
+    Response text(HttpStatus status, String body);
 
     /**
+     * @param status Response Status
      * @param body the message body
      * @return response itself
      */
-    Response html(String body);
+    Response html(HttpStatus status, String body);
 
     /**
+     * @param status Response Status
      * @param body json
      * @return response itself
      */
-    Response json(Object body);
+    Response json(HttpStatus status, Object body);
 }
