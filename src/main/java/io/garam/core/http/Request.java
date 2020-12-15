@@ -5,7 +5,13 @@ package io.garam.core.http;
  *
  * @author hyeyoom
  */
-public interface Request extends HttpMessage {
+public interface Request {
+
+    /**
+     * @param name field name
+     * @return field value
+     */
+    String getHeader(String name);
 
     /**
      * @return URI
@@ -17,5 +23,6 @@ public interface Request extends HttpMessage {
      * @return value of parameter
      */
     String parameter(String name);
+
 
 }
