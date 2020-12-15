@@ -43,4 +43,10 @@ public interface Response {
      * @return response itself
      */
     Response html(String body);
+
+    /**
+     * @param body json
+     * @return response itself
+     */
+    Response json(Object body);
 }

@@ -1,5 +1,6 @@
 package io.garam.core.http;
 
+import io.garam.core.utils.Converter;
 import io.garam.core.utils.HttpServletUtil;
 
 import javax.servlet.http.HttpServletResponse;
@@ -65,6 +66,20 @@ public class GaramHttpResponse implements Response {
             // TODO: error handling structure required.
             throw new IllegalStateException("");
         }
+    }
+
+    @Override
+    public Response json(Object body) {
+        status(HttpStatus.OK);
+        contentType("application/json");
+        final String json = Converter.stringify(body);
+        try {
+            HttpServletUtil.write(response.getOutputStream(), json);
+        } catch (IOException e) {
+            // TODO: error handling structure required.
+            throw new IllegalStateException("");
+        }
+        return this;
     }
 
 }

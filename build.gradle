@@ -28,6 +28,9 @@ dependencies {
     compile group: 'org.eclipse.jetty', name: 'jetty-server', version: '9.4.31.v20200723'
     compile group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '9.4.31.v20200723'
 
+    // data bind
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.0'
+
     // template engine
     compile group: 'com.samskivert', name: 'jmustache', version: '1.15'
 }
