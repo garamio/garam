@@ -22,4 +22,12 @@ public final class Converter {
     public static String stringify(Object obj) {
         return stringify(obj, true);
     }
+
+    public static <T> T toObject(String json, Class<T> type) {
+        try {
+            return MAPPER.readValue(json, type);
+        } catch (JsonProcessingException e) {
+            throw new DataConversionException("An error occurred during the json conversion", e);
+        }
+    }
 }

@@ -24,5 +24,9 @@ public interface Request {
      */
     String parameter(String name);
 
-
+    /**
+     * @param type type of object to be bound
+     * @param <T> type of data
+     */
+    <T> T bind(Class<T> type);
 }
