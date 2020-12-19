@@ -5,7 +5,13 @@ package io.garam.core.http;
  *
  * @author hyeyoom
  */
-public interface Request extends HttpMessage {
+public interface Request {
+
+    /**
+     * @param name field name
+     * @return field value
+     */
+    String getHeader(String name);
 
     /**
      * @return URI
@@ -18,4 +24,9 @@ public interface Request extends HttpMessage {
      */
     String parameter(String name);
 
+    /**
+     * @param type type of object to be bound
+     * @param <T> type of data
+     */
+    <T> T bind(Class<T> type);
 }

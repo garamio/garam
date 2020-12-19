@@ -1,5 +1,6 @@
 package io.garam.core.http;
 
+import io.garam.core.utils.Converter;
 import io.garam.core.utils.HttpServletUtil;
 
 import javax.servlet.http.HttpServletResponse;
@@ -29,17 +30,6 @@ public class GaramHttpResponse implements Response {
     }
 
     @Override
-    public Response text(String body) {
-        try {
-            HttpServletUtil.write(response.getOutputStream(), body);
-            return this;
-        } catch (IOException e) {
-            // TODO: error handling structure required.
-            throw new IllegalStateException("");
-        }
-    }
-
-    @Override
     public Response redirect(String path) {
         response.setStatus(HttpStatus.FOUND.getCode());
         header("Location", path);
@@ -50,6 +40,56 @@ public class GaramHttpResponse implements Response {
     public Response header(String name, String value) {
         response.setHeader(name, value);
         return this;
+    }
+
+    @Override
+    public Response text(HttpStatus status, String body) {
+        try {
+            status(status);
+            contentType("text/plain;");
+            HttpServletUtil.write(response.getOutputStream(), body);
+            return this;
+        } catch (IOException e) {
+            // TODO: error handling structure required.
+            throw new IllegalStateException("");
+        }
+    }
+
+    @Override
+    public Response html(HttpStatus status, String body) {
+        try {
+            status(status);
+            contentType("text/html;");
+            HttpServletUtil.write(response.getOutputStream(), body);
+            return this;
+        } catch (IOException e) {
+            // TODO: error handling structure required.
+            throw new IllegalStateException("");
+        }
+    }
+
+    @Override
+    public Response json(HttpStatus status, Object body) {
+        json(status, body, false);
+        return this;
+    }
+
+    @Override
+    public Response prettifiedJson(HttpStatus status, Object body) {
+        json(status, body, true);
+        return this;
+    }
+
+    private void json(HttpStatus status, Object body, boolean pretty) {
+        status(status);
+        contentType("application/json");
+        final String json = Converter.stringify(body, pretty);
+        try {
+            HttpServletUtil.write(response.getOutputStream(), json);
+        } catch (IOException e) {
+            // TODO: error handling structure required.
+            throw new IllegalStateException("");
+        }
     }
 
 }
