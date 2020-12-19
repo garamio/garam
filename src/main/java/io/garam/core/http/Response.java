@@ -20,12 +20,6 @@ public interface Response {
     Response contentType(String contentType);
 
     /**
-     * @param body the message body
-     * @return response itself
-     */
-    Response text(String body);
-
-    /**
      * @param path the path to move
      * @return response itself
      */
@@ -37,4 +31,32 @@ public interface Response {
      * @return response itself
      */
     Response header(String name, String value);
+
+    /**
+     * @param status Response Status
+     * @param body the message body
+     * @return response itself
+     */
+    Response text(HttpStatus status, String body);
+
+    /**
+     * @param status Response Status
+     * @param body the message body
+     * @return response itself
+     */
+    Response html(HttpStatus status, String body);
+
+    /**
+     * @param status Response Status
+     * @param body json
+     * @return response itself
+     */
+    Response json(HttpStatus status, Object body);
+
+    /**
+     * @param status Response status
+     * @param body prettified json
+     * @return response itself
+     */
+    Response prettifiedJson(HttpStatus status, Object body);
 }

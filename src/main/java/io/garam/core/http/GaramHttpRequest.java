@@ -1,5 +1,7 @@
 package io.garam.core.http;
 
+import io.garam.core.databind.DataBinder;
+
 import javax.servlet.http.HttpServletRequest;
 
 public class GaramHttpRequest implements Request {
@@ -8,6 +10,11 @@ public class GaramHttpRequest implements Request {
 
     public GaramHttpRequest(HttpServletRequest request) {
         this.request = request;
+    }
+
+    @Override
+    public String getHeader(String name) {
+        return request.getHeader(name);
     }
 
     @Override
@@ -21,7 +28,7 @@ public class GaramHttpRequest implements Request {
     }
 
     @Override
-    public String getHeader(String name) {
-        return request.getHeader(name);
+    public <T> T bind(Class<T> type) {
+        return DataBinder.getBoundData(request, type);
     }
 }
