@@ -1,10 +1,10 @@
 package io.garam.core.databind;
 
-import javax.servlet.http.HttpServletRequest;
+import io.garam.core.http.Request;
 
 public interface RequestArgumentResolver {
 
-    boolean supports(HttpServletRequest request);
+    boolean supports(Request request);
 
-    <T> T getBoundData(HttpServletRequest request, Class<T> type);
+    <T> T resolveArgument(Request request, Class<T> type);
 }

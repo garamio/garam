@@ -1,5 +1,7 @@
 package io.garam.core.databind;
 
+import io.garam.core.http.GaramHttpRequest;
+import io.garam.core.http.Request;
 import io.garam.fixtures.MockHttpServletRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,8 +16,10 @@ class QueryStringRequestArgumentResolverTest {
     @DisplayName("QueryString이 요청에 존재하면 supports 메서드의 결과 값은 true")
     @Test
     void testSupports() {
-        final MockHttpServletRequest request = new MockHttpServletRequest();
-        request.setRequestURI(uri);
+        final MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
+        mockHttpServletRequest.setRequestURI(uri);
+        final Request request = new GaramHttpRequest(mockHttpServletRequest);
+
         final RequestArgumentResolver resolver = new QueryStringRequestArgumentResolver();
         assertThat(resolver.supports(request)).isTrue();
     }
@@ -23,10 +27,12 @@ class QueryStringRequestArgumentResolverTest {
     @DisplayName("QueryString으로부터 객체를 추출할 수 있는지 테스트")
     @Test
     void testGetBoundData() {
-        final MockHttpServletRequest request = new MockHttpServletRequest();
-        request.setRequestURI(uri);
+        final MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
+        mockHttpServletRequest.setRequestURI(uri);
+        final Request request = new GaramHttpRequest(mockHttpServletRequest);
+
         final RequestArgumentResolver resolver = new QueryStringRequestArgumentResolver();
-        final DummyData data = resolver.getBoundData(request, DummyData.class);
+        final DummyData data = resolver.resolveArgument(request, DummyData.class);
         assertThat(data).isNotNull();
         assertThat(data.getParam1()).isEqualTo("test");
     }

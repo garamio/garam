@@ -18,11 +18,17 @@ public interface Request {
      */
     String uri();
 
+    String getContentType();
+
+    String getQueryString();
+
     /**
      * @param name name of parameter
      * @return value of parameter
      */
-    String parameter(String name);
+    String getParameter(String name);
+
+    byte[] body();
 
     /**
      * @param type type of object to be bound

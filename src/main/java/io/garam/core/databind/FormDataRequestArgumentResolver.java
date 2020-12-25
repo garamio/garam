@@ -8,11 +8,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
-public class QueryStringRequestArgumentResolver implements RequestArgumentResolver {
+public class FormDataRequestArgumentResolver implements RequestArgumentResolver {
 
     @Override
     public boolean supports(Request request) {
-        return request.getQueryString() != null;
+        return request.getContentType().contains("application/x-www-form-urlencoded");
     }
 
     @Override
@@ -23,8 +23,7 @@ public class QueryStringRequestArgumentResolver implements RequestArgumentResolv
                 .orElseThrow(() -> new DataBindingException("Unable to find non-args constructor."));
         try {
             final T obj = type.cast(constructor.newInstance());
-            for (Field field :
-                    type.getDeclaredFields()) {
+            for (Field field : type.getDeclaredFields()) {
                 field.setAccessible(true);
                 field.set(obj, request.getParameter(field.getName()));
             }
