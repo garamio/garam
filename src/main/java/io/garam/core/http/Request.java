@@ -1,5 +1,7 @@
 package io.garam.core.http;
 
+import java.util.Map;
+
 /**
  * Interface to be implemented by objects that represent request from client over http.
  *
@@ -18,11 +20,19 @@ public interface Request {
      */
     String uri();
 
+    String getContentType();
+
+    String getQueryString();
+
     /**
      * @param name name of parameter
      * @return value of parameter
      */
-    String parameter(String name);
+    String getParameter(String name);
+
+    Map<String, String[]> getParameterMap();
+
+    byte[] body();
 
     /**
      * @param type type of object to be bound
