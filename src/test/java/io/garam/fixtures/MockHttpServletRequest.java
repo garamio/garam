@@ -5,6 +5,7 @@ import javax.servlet.http.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 import java.util.*;
 
@@ -13,6 +14,8 @@ public class MockHttpServletRequest implements HttpServletRequest {
     private String requestURI;
 
     private final Map<String, String[]> parameters = new LinkedHashMap<>();
+    private String contentType;
+    private byte[] body;
 
     public void setRequestURI(String requestURI) {
         this.requestURI = requestURI;
@@ -227,7 +230,7 @@ public class MockHttpServletRequest implements HttpServletRequest {
 
     @Override
     public String getContentType() {
-        return null;
+        return contentType;
     }
 
     @Override
@@ -253,7 +256,7 @@ public class MockHttpServletRequest implements HttpServletRequest {
 
     @Override
     public Map<String, String[]> getParameterMap() {
-        return null;
+        return parameters;
     }
 
     @Override
@@ -379,5 +382,20 @@ public class MockHttpServletRequest implements HttpServletRequest {
     @Override
     public DispatcherType getDispatcherType() {
         return null;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public void setBody(String body) {
+        this.body = body.getBytes(StandardCharsets.UTF_8);
+        if ("application/x-www-form-urlencoded".equals(contentType)) {
+            final String[] params = body.split("&");
+            for (String param : params) {
+                final String[] keyAndValue = param.split("=");
+                setParameter(keyAndValue[0], keyAndValue[1]);
+            }
+        }
     }
 }

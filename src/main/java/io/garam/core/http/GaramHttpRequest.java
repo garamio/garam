@@ -5,6 +5,7 @@ import io.garam.core.databind.RequestArgumentResolverComposite;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 public class GaramHttpRequest implements Request {
 
@@ -39,6 +40,11 @@ public class GaramHttpRequest implements Request {
     @Override
     public String getParameter(String name) {
         return request.getParameter(name);
+    }
+
+    @Override
+    public Map<String, String[]> getParameterMap() {
+        return request.getParameterMap();
     }
 
     @Override

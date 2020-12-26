@@ -26,7 +26,7 @@ class QueryStringRequestArgumentResolverTest {
 
     @DisplayName("QueryString으로부터 객체를 추출할 수 있는지 테스트")
     @Test
-    void testGetBoundData() {
+    void testResolveArgument() {
         final MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
         mockHttpServletRequest.setRequestURI(uri);
         final Request request = new GaramHttpRequest(mockHttpServletRequest);
