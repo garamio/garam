@@ -15,6 +15,9 @@ public final class ClassUtils {
             for (Field field : type.getDeclaredFields()) {
                 field.setAccessible(true);
                 final String raw = parameterMap.getParameter(field.getName());
+                if (raw == null) {
+                    continue;
+                }
                 field.set(obj, convertStringValue(raw, field.getType()));
             }
             return obj;
