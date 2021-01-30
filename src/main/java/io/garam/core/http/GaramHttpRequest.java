@@ -29,7 +29,11 @@ public class GaramHttpRequest implements Request {
 
     @Override
     public String getContentType() {
-        return request.getContentType();
+        final String contentType = request.getContentType();
+        if (contentType == null) {
+            return "";
+        }
+        return contentType;
     }
 
     @Override

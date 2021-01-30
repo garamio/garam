@@ -32,8 +32,8 @@ public interface Context {
 
     /**
      * @param viewName the name of view.
-     * @param model the holder for model attributes.
+     * @param models the holder for model attributes.
      */
-    void render(String viewName, Model model);
+    void render(String viewName, Model... models);
 
 }

@@ -53,8 +53,8 @@ public class DefaultContext implements Context {
     }
 
     @Override
-    public void render(String viewName, Model model) {
-        final Model newModel = this.model.mergeAttributes(model);
+    public void render(String viewName, Model... models) {
+        final Model newModel = this.model.mergeAttributes(models);
         final String renderedPage = templateEngine.render(viewName, newModel);
         response.html(HttpStatus.OK, renderedPage);
     }
