@@ -10,10 +10,10 @@ import java.util.Map;
 public interface Model {
 
     /**
-     * @param otherModel model to be merged into this model.
+     * @param otherModels models to be merged into this model.
      * @return new merged model.
      */
-    Model mergeAttributes(Model otherModel);
+    Model mergeAttributes(Model... otherModels);
 
     /**
      * @param attributeName the name of model attribute

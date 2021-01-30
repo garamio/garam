@@ -5,6 +5,7 @@ import io.garam.core.ui.Model;
 import io.garam.core.ui.TemplateEngine;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 
 public class DefaultContext implements Context {
@@ -17,7 +18,7 @@ public class DefaultContext implements Context {
 
     public DefaultContext(HttpServletRequest request, HttpServletResponse response, TemplateEngine templateEngine) {
         this(
-                new GaramHttpRequest(request),
+                new GaramHttpRequest(new HttpServletRequestWrapper(request)),
                 new GaramHttpResponse(response),
                 new GaramHttpSession(request.getSession(true)),
                 templateEngine
@@ -52,8 +53,8 @@ public class DefaultContext implements Context {
     }
 
     @Override
-    public void render(String viewName, Model model) {
-        final Model newModel = this.model.mergeAttributes(model);
+    public void render(String viewName, Model... models) {
+        final Model newModel = this.model.mergeAttributes(models);
         final String renderedPage = templateEngine.render(viewName, newModel);
         response.html(HttpStatus.OK, renderedPage);
     }
